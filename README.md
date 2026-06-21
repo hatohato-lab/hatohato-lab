@@ -5,7 +5,7 @@
 
 ## AI エージェント（オラクル種別ごと）
 
-| リポジトリ | 何をする | 正しさの測り方（オラクル） |
+| リポジトリ | タスク | 正しさの測り方（オラクル） |
 |---|---|---|
 | [js-to-ts-migration-agent](https://github.com/hatohato-lab/js-to-ts-migration-agent) | JavaScript → TypeScript 移行 | 差分テスト（元コードの実行結果を基準にする） |
 | [py2to3-agent](https://github.com/hatohato-lab/py2to3-agent) | Python 2 → 3 移植 | 決定的 golden（保存した期待出力と一致） |
