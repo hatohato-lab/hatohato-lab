@@ -1,7 +1,10 @@
 # HatoHato Lab
 
+AI agents built with evaluation-driven development (EDD) — each repository demonstrates a different test oracle.<br>
+The rest of this README is written in Japanese.
+
 評価駆動開発（EDD）で AI エージェントを作っています。
-各エージェントは「**出力の正しさをどう機械判定するか（オラクル）**」を 1 本ずつ別の手法で実証する構成です。薄いラッパーの量産ではなく、リポジトリごとに違う"物差し"を持たせています。
+各エージェントは「**出力の正しさをどう機械判定するか（オラクル）**」を 1 本ずつ別の手法で実証する構成です。薄いラッパーの量産ではなく、リポジトリごとに違う「物差し」を持たせています。
 
 ## AI エージェント（オラクル種別ごと）
 
@@ -21,6 +24,7 @@
 
 各リポジトリは「エージェント定義 ＋ 外部オラクル（`--selftest` 内蔵）＋ 設計メモ ＋ README」で構成。
 `python eval/oracle.py --selftest` で、正しい実装は PASS・既知バグ実装は FAIL になることを再現できます（オラクル自身の検証）。
+各リポジトリには、専門用語を使わずに中身を説明した「説明書.md」も同梱しています（アカウント全体の説明は本リポジトリの [説明書.md](./説明書.md)）。
 
 ## その他の公開リポジトリ
 
