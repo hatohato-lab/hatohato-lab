@@ -26,6 +26,14 @@ The rest of this README is written in Japanese.
 `python eval/oracle.py --selftest` で、正しい実装は PASS・既知バグ実装は FAIL になることを再現できます（オラクル自身の検証）。
 各リポジトリには、専門用語を使わずに中身を説明した「説明書.md」も同梱しています（アカウント全体の説明は本リポジトリの [説明書.md](./説明書.md)）。
 
+## Claude Code ツール
+
+Claude Code を長期運用する中で生まれた実用ツール。自分の実環境でドッグフーディングしてから公開しています。
+
+| リポジトリ | 何をする | 特徴 |
+|---|---|---|
+| [claude-code-hikitsugi](https://github.com/hatohato-lab/claude-code-hikitsugi) | 新しいチャットで「◯◯のチャットを継いで」と一言いうだけで、前のチャットの続きから再開できる。無傷の生ログ（.jsonl）から引き継ぎメモを自動再建する。 | 完全ローカル・通信なし。秘密情報のマスキング既定ON。機械判定20項目の eval つき。 |
+
 ## その他の公開リポジトリ
 
 - [formpilot](https://github.com/hatohato-lab/formpilot) — PDF データから Web フォームへ自動入力する AI エージェント（LangGraph ReAct + Claude Vision + Playwright）
