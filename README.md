@@ -21,6 +21,7 @@ The rest of this README is written in Japanese.
 | [text-to-sql-agent](https://github.com/hatohato-lab/text-to-sql-agent) | 日本語の質問を SQL に直す | 実行オラクル | SQL を実際に DB で動かし、出てくる結果（答え）が一致するかで判定。書き方の違いは結果で吸収する。 |
 | [agent-spec-reviewer](https://github.com/hatohato-lab/agent-spec-reviewer) | 他のエージェント定義を点検する（メタ） | 査読検出力 | わざと欠陥を仕込んだ定義の見本を、査読が全部見つけ正例を通せるかで判定（depth で粘りを調整）。 |
 | [harness-lens-reviewer](https://github.com/hatohato-lab/harness-lens-reviewer) | 設計・計画を6レンズで点検する（メタ） | 査読検出力（6レンズ） | わざと特定レンズに引っかかる見本で「正しいレンズを赤に・良い設計は通す」かで判定（劇場労働・複雑性転嫁・eval なし 等）。 |
+| [rule-retirement-eval](https://github.com/hatohato-lab/rule-retirement-eval) | AIへのルールが今のモデルにまだ必要かを実測でふるい分ける | 行動回帰テスト＋統計 | ルール本文を見せずに失敗場面の再現タスクを21試行以上実行し、再発を検出器で機械判定。再発ゼロでも95%信頼上限（Clopper–Pearson）を併記し、退役の最終判断は人間に残す。実測でルール2本を退役・1本の形骸化を発見した実施例つき。 |
 
 各リポジトリは「エージェント定義 ＋ 外部オラクル（`--selftest` 内蔵）＋ 設計メモ ＋ README」で構成。
 `python eval/oracle.py --selftest` で、正しい実装は PASS・既知バグ実装は FAIL になることを再現できます（オラクル自身の検証）。
