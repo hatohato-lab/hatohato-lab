@@ -39,5 +39,7 @@ Claude Code を長期運用する中で生まれた実用ツール。自分の�
 
 ## その他の公開リポジトリ
 
-- [formpilot](https://github.com/hatohato-lab/formpilot) — PDF データから Web フォームへ自動入力する AI エージェント（LangGraph ReAct + Claude Vision + Playwright）
-- [VBA_Tools](https://github.com/hatohato-lab/VBA_Tools) — VBA ツール集
+| リポジトリ | 何をする | 特徴 |
+|---|---|---|
+| [formpilot](https://github.com/hatohato-lab/formpilot) | PDF データから Web フォームへ自動入力する AI エージェント | LangGraph ReAct + Claude Vision + Playwright の構成。PDFの読み取りから画面操作までを一気通貫で自動化。 |
+| [VBA_Tools](https://github.com/hatohato-lab/VBA_Tools) | Excel 業務効率化の VBA マクロ集 | 結合・一覧・抽出・監査など、日常の Excel 作業を自動化する実用ツール群。 |
