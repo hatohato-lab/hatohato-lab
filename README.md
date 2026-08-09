@@ -35,6 +35,7 @@ Claude Code を長期運用する中で生まれた実用ツール。自分の�
 |---|---|---|
 | [claude-code-hikitsugi](https://github.com/hatohato-lab/claude-code-hikitsugi) | 新しいチャットで「◯◯のチャットを継いで」と一言いうだけで、前のチャットの続きから再開できる。無傷の生ログ（.jsonl）から引き継ぎメモを自動再建する。 | 完全ローカル・通信なし。秘密情報のマスキング既定ON。機械判定20項目の eval つき。 |
 | [rule-retirement-eval](https://github.com/hatohato-lab/rule-retirement-eval) | 溜まった CLAUDE.md・ルールのうち「今のモデルにはもう不要なもの」を実測でふるい分ける。ルール無しで失敗場面を再現させ、再発するかを機械判定。 | 実施例つき（ルール有り/無しの2群×各105試行でルール2本を退役、「有っても破られるルール」1本を発見）。上のオラクル一覧にも掲載（行動回帰テスト型）。 |
+| [hatohatoscope](https://github.com/hatohato-lab/hatohatoscope) | AIとの開発で膨らむ作業フォルダ全体を、ブラウザ1枚で「見る・探す・読む」。ファイル名の一部で即検索、Markdown＋Mermaid描画、新しいファイルは自動でツリーに反映。 | 「AIが増やす情報量 × 増えない人間の認知」のギャップを埋める読書用ビューア（README に認知科学の論文参照つき）。localhost 専用設計。毎日ドッグフーディング中。 |
 
 ## その他の公開リポジトリ
 
