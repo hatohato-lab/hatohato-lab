@@ -35,7 +35,6 @@ Claude Code を長期運用する中で生まれた実用ツール。自分の�
 | リポジトリ | 何をする | 特徴 |
 |---|---|---|
 | [claude-code-hikitsugi](https://github.com/hatohato-lab/claude-code-hikitsugi) | 新しいチャットで「◯◯のチャットを継いで」と一言いうだけで、前のチャットの続きから再開できる。無傷の生ログ（.jsonl）から引き継ぎメモを自動再建する。 | 完全ローカル・通信なし。秘密情報のマスキング既定ON。機械判定20項目の eval つき。 |
-| [fractal-spec-agent](https://github.com/hatohato-lab/fractal-spec-agent) | 要件・Issueからフラクタル構造の設計書＋用語集を生成する | 文書構造検査 | 「枠1枚→要素→また枠」の構造規則（1枚の分量上限・枠の行数・全ノード同形式・リンク完全性・用語の定義義務）を機械検査。わざと壊した見本6種を1見本1違反で検出できるかで自己検証。 |
 | [rule-retirement-eval](https://github.com/hatohato-lab/rule-retirement-eval) | 溜まった CLAUDE.md・ルールのうち「今のモデルにはもう不要なもの」を実測でふるい分ける。ルール無しで失敗場面を再現させ、再発するかを機械判定。 | 実施例つき（ルール有り/無しの2群×各105試行でルール2本を退役、「有っても破られるルール」1本を発見）。上のオラクル一覧にも掲載（行動回帰テスト型）。 |
 | [hatohatoscope](https://github.com/hatohato-lab/hatohatoscope) | AIとの開発で膨らむ作業フォルダ全体を、ブラウザ1枚で「見る・探す・読む」。ファイル名の一部で即検索、Markdown＋Mermaid描画、新しいファイルは自動でツリーに反映。 | 「AIが増やす情報量 × 増えない人間の認知」のギャップを埋める読書用ビューア（README に認知科学の論文参照つき）。localhost 専用設計。毎日ドッグフーディング中。 |
 
