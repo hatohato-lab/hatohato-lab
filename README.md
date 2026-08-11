@@ -21,7 +21,7 @@ The rest of this README is written in Japanese.
 | [text-to-sql-agent](https://github.com/hatohato-lab/text-to-sql-agent) | 日本語の質問を SQL に直す | 実行オラクル | SQL を実際に DB で動かし、出てくる結果（答え）が一致するかで判定。書き方の違いは結果で吸収する。 |
 | [agent-spec-reviewer](https://github.com/hatohato-lab/agent-spec-reviewer) | 他のエージェント定義を点検する（メタ） | 査読検出力 | わざと欠陥を仕込んだ定義の見本を、査読が全部見つけ正例を通せるかで判定（depth で粘りを調整）。 |
 | [harness-lens-reviewer](https://github.com/hatohato-lab/harness-lens-reviewer) | 設計・計画を6レンズで点検する（メタ） | 査読検出力（6レンズ） | わざと特定レンズに引っかかる見本で「正しいレンズを赤に・良い設計は通す」かで判定（劇場労働・複雑性転嫁・eval なし 等）。 |
-| [fractal-spec-agent](https://github.com/hatohato-lab/fractal-spec-agent) | 要件・Issueからフラクタル構造の設計書＋用語集を生成する | 文書構造検査 | 「枠1枚→要素→また枠」の構造規則（1枚の分量上限・枠の行数・全ノード同形式・リンク完全性・用語の定義義務）を機械検査。わざと壊した見本6種を1見本1違反で検出できるかで自己検証。 |
+| [fractal-spec-agent](https://github.com/hatohato-lab/fractal-spec-agent) | 要件・Issueからフラクタル構造の設計書＋用語集を生成する | 文書構造検査 | 「枠1枚→要素→また枠」の構造規則（1枚の分量上限・枠の行数・全ノード同形式・リンク完全性・用語の定義義務・UML図の規則）を機械検査。わざと壊した見本8種を1見本1違反で検出できるかで自己検証。 |
 | [rule-retirement-eval](https://github.com/hatohato-lab/rule-retirement-eval) | AIへのルールが今のモデルにまだ必要かを実測でふるい分ける | 行動回帰テスト＋統計 | ルール本文を見せずに失敗場面の再現タスクを21試行以上実行し、再発を検出器で機械判定。再発ゼロでも95%信頼上限（Clopper–Pearson）を併記し、退役の最終判断は人間に残す。実測でルール2本を退役・1本の形骸化を発見した実施例つき。 |
 
 各リポジトリは「エージェント定義 ＋ 外部オラクル（`--selftest` 内蔵）＋ 設計メモ ＋ README」で構成。
