@@ -4,9 +4,9 @@ AIエージェントの評価設計（オラクル）の実証と、Claude Code 
 
 | 系統 | 本数 | 概要 |
 |---|---|---|
-| EDD エージェント | 13 | 1リポジトリ=1オラクル。差分テスト／golden／メタモルフィック／プロパティ往復／統計検定（カイ二乗）／ファジング／仕様アサーション／実行結果照合／LLM-as-Judge／査読のメタ評価×2／文書構造検査／行動回帰テストを、それぞれ独立に実証 |
-| Claude Code ツール | 5 | 複数セッション並行の実運用から切り出した道具。チャット引き継ぎ（hikitsugi）・ルール同期（rules-sync）・チャット間郵便（yubin）・作業フォルダビューア（hatohatoscope）・ルール退役の実測（rule-retirement-eval）。全て機械判定 eval 同梱 |
-| その他 | 2 | formpilot（LangGraph ReAct＋Vision＋Playwright のフォーム自動入力）／VBA_Tools（Excel マクロ集） |
+| EDD エージェント | 13 | 1リポジトリ=1オラクルで、13種の採点手法を独立に実証：<br>・差分テスト<br>・決定的 golden<br>・メタモルフィック<br>・プロパティ往復<br>・統計検定（カイ二乗）<br>・ファジング<br>・仕様アサーション<br>・実行結果照合（SQL）<br>・LLM-as-Judge＋決定的ゲート<br>・査読のメタ評価×2<br>・文書構造検査<br>・行動回帰テスト＋統計 |
+| Claude Code ツール | 5 | 複数セッション並行の実運用から切り出した道具。全て機械判定 eval 同梱：<br>・チャット引き継ぎ（hikitsugi）<br>・ルール同期（rules-sync）<br>・チャット間郵便（yubin）<br>・作業フォルダビューア（hatohatoscope）<br>・ルール退役の実測（rule-retirement-eval） |
+| その他 | 2 | ・formpilot（LangGraph ReAct＋Vision＋Playwright のフォーム自動入力）<br>・VBA_Tools（Excel マクロ集） |
 
 共通するのは「正しさの判定を機械に、最終判断を人間に」という作り方です。
 ツール群も自分の実環境で毎日使ってから公開しています。
