@@ -13,7 +13,7 @@ AIエージェントの評価設計（オラクル）の実証と、Claude Code 
 
 ## AI エージェント（オラクル種別ごと）
 
-| リポジトリ | 何をする | カテゴリ | 詳細説明 | 更新日 |
+| リポジトリ | タスク | カテゴリ | 詳細説明 | 更新日 |
 |---|---|---|---|---|
 | [js-to-ts-migration-agent](https://github.com/hatohato-lab/js-to-ts-migration-agent) | JavaScript を TypeScript に書き換える | 差分テスト | 元の JS を実行した出力と、変換後の出力が一致するかで判定。手書きの正解を使わず、元コードそのものを物差しにする。 | 2026-07-22 |
 | [py2to3-agent](https://github.com/hatohato-lab/py2to3-agent) | Python 2 のコードを Python 3 に直す | 決定的 golden | あらかじめ保存した正解の出力（golden）と、移植後の実行結果が一致するかで判定。 | 2026-07-22 |
@@ -40,7 +40,7 @@ AIエージェントの評価設計（オラクル）の実証と、Claude Code 
 
 Claude Code を長期運用する中で生まれた実用ツール。自分の実環境で毎日使い込んでから公開しています。
 
-| リポジトリ | 何をする | 詳細説明 | 更新日 |
+| リポジトリ | タスク | 詳細説明 | 更新日 |
 |---|---|---|---|
 | [claude-code-hikitsugi](https://github.com/hatohato-lab/claude-code-hikitsugi) | 新しいチャットで「◯◯のチャットを継いで」と一言いうだけで、前のチャットの続きから再開できる。無傷の生ログ（.jsonl）から引き継ぎメモを自動再建する。 | 完全ローカル・通信なし。秘密情報のマスキング既定ON。機械判定20項目の eval つき。 | 2026-08-11 |
 | [rule-retirement-eval](https://github.com/hatohato-lab/rule-retirement-eval) | 溜まった CLAUDE.md・ルールのうち「今のモデルにはもう不要なもの」を実測でふるい分ける。ルール無しで失敗場面を再現させ、再発するかを機械判定。 | 実施例つき（ルール有り/無しの2群×各105試行でルール2本を退役、「有っても破られるルール」1本を発見）。上のオラクル一覧にも掲載（行動回帰テスト型）。 | 2026-08-09 |
@@ -50,7 +50,7 @@ Claude Code を長期運用する中で生まれた実用ツール。自分の�
 
 ## その他の公開リポジトリ
 
-| リポジトリ | 何をする | 詳細説明 | 更新日 |
+| リポジトリ | タスク | 詳細説明 | 更新日 |
 |---|---|---|---|
 | [formpilot](https://github.com/hatohato-lab/formpilot) | PDF データから Web フォームへ自動入力する AI エージェント | LangGraph ReAct + Claude Vision + Playwright の構成。PDFの読み取りから画面操作までを一気通貫で自動化。 | 2026-07-22 |
 | [VBA_Tools](https://github.com/hatohato-lab/VBA_Tools) | Excel 業務効率化の VBA マクロ集 | 結合・一覧・抽出・監査など、日常の Excel 作業を自動化する実用ツール群。 | 2026-07-22 |
