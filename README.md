@@ -9,7 +9,7 @@ AIエージェントの評価設計（オラクル）の実証と、Claude Code 
 | その他 | 2 | formpilot（LangGraph ReAct＋Vision＋Playwright のフォーム自動入力）／VBA_Tools（Excel マクロ集） |
 
 共通するのは「正しさの判定を機械に、最終判断を人間に」という作り方です。
-ツール群も自分の実環境でドッグフーディングしてから公開しています。
+ツール群も自分の実環境で毎日使ってから公開しています。
 
 ## AI エージェント（オラクル種別ごと）
 
@@ -38,13 +38,13 @@ AIエージェントの評価設計（オラクル）の実証と、Claude Code 
 
 ## Claude Code ツール
 
-Claude Code を長期運用する中で生まれた実用ツール。自分の実環境でドッグフーディングしてから公開しています。
+Claude Code を長期運用する中で生まれた実用ツール。自分の実環境で毎日使い込んでから公開しています。
 
 | リポジトリ | 何をする | 特徴 | 更新日 |
 |---|---|---|---|
 | [claude-code-hikitsugi](https://github.com/hatohato-lab/claude-code-hikitsugi) | 新しいチャットで「◯◯のチャットを継いで」と一言いうだけで、前のチャットの続きから再開できる。無傷の生ログ（.jsonl）から引き継ぎメモを自動再建する。 | 完全ローカル・通信なし。秘密情報のマスキング既定ON。機械判定20項目の eval つき。 | 2026-08-11 |
 | [rule-retirement-eval](https://github.com/hatohato-lab/rule-retirement-eval) | 溜まった CLAUDE.md・ルールのうち「今のモデルにはもう不要なもの」を実測でふるい分ける。ルール無しで失敗場面を再現させ、再発するかを機械判定。 | 実施例つき（ルール有り/無しの2群×各105試行でルール2本を退役、「有っても破られるルール」1本を発見）。上のオラクル一覧にも掲載（行動回帰テスト型）。 | 2026-08-09 |
-| [hatohatoscope](https://github.com/hatohato-lab/hatohatoscope) | AIとの開発で膨らむ作業フォルダ全体を、ブラウザ1枚で「見る・探す・読む」。ファイル名の一部で即検索、Markdown＋Mermaid描画、新しいファイルは自動でツリーに反映。 | 「AIが増やす情報量 × 増えない人間の認知」のギャップを埋める読書用ビューア（README に認知科学の論文参照つき）。localhost 専用設計。毎日ドッグフーディング中。 | 2026-08-23 |
+| [hatohatoscope](https://github.com/hatohato-lab/hatohatoscope) | AIとの開発で膨らむ作業フォルダ全体を、ブラウザ1枚で「見る・探す・読む」。ファイル名の一部で即検索、Markdown＋Mermaid描画、新しいファイルは自動でツリーに反映。 | 「AIが増やす情報量 × 増えない人間の認知」のギャップを埋める読書用ビューア（README に認知科学の論文参照つき）。localhost 専用設計。毎日自分で使用中。 | 2026-08-23 |
 | [claude-code-rules-sync](https://github.com/hatohato-lab/claude-code-rules-sync) | ルール（.claude/rules）を書き換えると、開いている全チャットに「読み直して」が自動で届く。ルールは開始時に一度しか読まれない、という隙間を埋めるフック。 | セッション別に変更を検知し、同じ変更は1回だけ通知。新規チャットには通知しない（開始時に読めているため）。機械判定14項目の eval つき。 | 2026-08-15 |
 | [claude-code-yubin](https://github.com/hatohato-lab/claude-code-yubin) | 複数チャット（セッション）同士が手紙をやりとりする「ファイル郵便」。フォルダが宛先、Markdownファイルが手紙、ファイル名の 新着_/既読_ が未読既読。フックが本人の発言のたびに新着を検知してClaudeに知らせる。 | サーバ・常駐プロセスなし。フェイルオープン設計。機械判定6項目の eval つき。hikitsugi（時間方向）・rules-sync（放送）と同じ仕組みの家族で、こちらはチャット⇔チャットの双方向。 | 2026-08-23 |
 
