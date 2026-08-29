@@ -5,7 +5,7 @@ AIエージェントの評価設計（オラクル）の実証と、Claude Code 
 | 系統 | 本数 | 概要 |
 |---|---|---|
 | EDD エージェント | 13 | 1リポジトリ=1オラクルで、13種の採点手法を独立に実証：<br>・差分テスト<br>・決定的 golden<br>・メタモルフィック<br>・プロパティ往復<br>・統計検定（カイ二乗）<br>・ファジング<br>・仕様アサーション<br>・実行結果照合（SQL）<br>・LLM-as-Judge＋決定的ゲート<br>・査読のメタ評価×2<br>・文書構造検査<br>・行動回帰テスト＋統計 |
-| Claude Code ツール | 6 | 複数セッション並行の実運用から切り出した道具。全て機械判定 eval 同梱：<br>・チャット引き継ぎ（hikitsugi）<br>・ルール同期（rules-sync）<br>・チャット間の黒板（kokuban）<br>・作業フォルダビューア（hatohatoscope）<br>・ルール退役の実測（rule-retirement-eval）<br>・チャットの容量計（context-meter） |
+| Claude Code ツール | 7 | 複数セッション並行の実運用から切り出した道具。全て機械判定 eval 同梱：<br>・チャット引き継ぎ（hikitsugi）<br>・ルール同期（rules-sync）<br>・チャット間の黒板（kokuban）<br>・作業フォルダビューア（hatohatoscope）<br>・ルール退役の実測（rule-retirement-eval）<br>・チャットの容量計（context-meter）<br>・改善の地図（kaizen-map） |
 | その他 | 2 | ・formpilot（LangGraph ReAct＋Vision＋Playwright のフォーム自動入力）<br>・VBA_Tools（Excel マクロ集） |
 
 共通するのは「正しさの判定を機械に、最終判断を人間に」という作り方です。
@@ -48,6 +48,7 @@ Claude Code の長期運用で必要に迫られて作った道具群。毎日�
 | [claude-code-rules-sync](https://github.com/hatohato-lab/claude-code-rules-sync) | ルール（.claude/rules）を書き換えると、開いている全チャットに「読み直して」が自動で届く。ルールは開始時に一度しか読まれない、という隙間を埋めるフック。 | セッション間通信（1→全・放送） | セッション別に変更を検知し、同じ変更は1回だけ通知。新規チャットには通知しない（開始時に読めているため）。機械判定14項目の eval つき。 | 2026-08-15 |
 | [claude-code-kokuban](https://github.com/hatohato-lab/claude-code-kokuban) | 複数チャット（セッション）同士が連絡を書き合う「黒板」。フォルダが宛先、Markdownファイルが書き込み、ファイル名の 新着_/既読_ が未読既読。フックが本人の発言のたびに新着を検知してClaudeに知らせる。 | セッション間通信（双方向） | サーバ・常駐プロセスなし。フェイルオープン設計。機械判定6項目の eval つき。hikitsugi（時間方向）・rules-sync（放送）と同じ仕組みの家族で、こちらはチャット⇔チャットの双方向。 | 2026-08-29 |
 | [claude-code-context-meter](https://github.com/hatohato-lab/claude-code-context-meter) | 稼働中の全チャットのコンテキスト使用量・上限比・残り・実メモリ・チャット名を1つの表で出す容量計 | コンテキスト計測 | 使用量は生ログ末尾の usage（input＋cache_creation＋cache_read）から読む（ファイルサイズは使用量ではない）。70%で警告、コンパクティング2回以上で乗り換え検討を提示。実測データ（発動点ほぼ100%・残存約8.7%・停止98〜270秒）を README に収録。Windows/Linux 両対応・標準ライブラリのみ。機械判定8項目の eval つき。 | 2026-08-27 |
+| [kaizen-map](https://github.com/hatohato-lab/kaizen-map) | 任意のシステムを走査し、地図（PlantUML図）＋改善候補＋乖離対策の3表を左メニュー付きHTML1枚にする | システム改善（地図＋レンズ） | 改善候補は観点ごとの独立レンズ（第1層＝テスト欠落・設定の匂い・死んだコード。すべて決定的判定）。人間とAIの乖離を用語表・推定表・判断履歴の3表で構造的に防ぎ、却下済みの提案は二度と蒸し返さない。機械判定11項目の eval つき。 | 2026-08-29 |
 
 ## その他の公開リポジトリ
 
