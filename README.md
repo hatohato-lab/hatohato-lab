@@ -5,7 +5,7 @@ AIエージェントの評価設計（オラクル）の実証と、Claude Code 
 | 系統 | 本数 | 概要 |
 |---|---|---|
 | EDD エージェント | 13 | 1リポジトリ=1オラクルで、13種の採点手法を独立に実証：<br>・差分テスト<br>・決定的 golden<br>・メタモルフィック<br>・プロパティ往復<br>・統計検定（カイ二乗）<br>・ファジング<br>・仕様アサーション<br>・実行結果照合（SQL）<br>・LLM-as-Judge＋決定的ゲート<br>・査読のメタ評価×2<br>・文書構造検査<br>・行動回帰テスト＋統計 |
-| Claude Code ツール | 10 | 複数セッション並行の実運用から切り出した道具。全て機械判定 eval 同梱：<br>・チャット引き継ぎ（hikitsugi）<br>・ルール同期（rules-sync）<br>・チャット間の黒板（kokuban）<br>・作業フォルダビューア（hatohatoscope）<br>・ルール退役の実測（rule-retirement-eval）<br>・チャットの容量計（context-meter）<br>・改善の地図（kaizen-map）<br>・バージョンの番人（version-guard）<br>・セッションの名簿（session-board）<br>・チャットの診断（chat-doctor） |
+| Claude Code ツール | 11 | 複数セッション並行の実運用から切り出した道具。全て機械判定 eval 同梱：<br>・チャット引き継ぎ（hikitsugi）<br>・ルール同期（rules-sync）<br>・チャット間の黒板（kokuban）<br>・作業フォルダビューア（hatohatoscope）<br>・ルール退役の実測（rule-retirement-eval）<br>・チャットの容量計（context-meter）<br>・改善の地図（kaizen-map）<br>・バージョンの番人（version-guard）<br>・セッションの名簿（session-board）<br>・チャットの診断（chat-doctor）<br>・評価駆動の羅針盤（oracle-compass） |
 | その他 | 2 | ・formpilot（LangGraph ReAct＋Vision＋Playwright のフォーム自動入力）<br>・VBA_Tools（Excel マクロ集） |
 
 共通するのは「正しさの判定を機械に、最終判断を人間に」という作り方です。
@@ -50,6 +50,7 @@ Claude Code の長期運用で必要に迫られて作った道具群。毎日�
 | [claude-code-context-meter](https://github.com/hatohato-lab/claude-code-context-meter) | 稼働中の全チャットのコンテキスト使用量・上限比・残り・実メモリ・チャット名を1つの表で出す容量計 | コンテキスト計測 | 使用量は生ログ末尾の usage（input＋cache_creation＋cache_read）から読む（ファイルサイズは使用量ではない）。70%で警告、コンパクティング2回以上で乗り換え検討を提示。実測データ（発動点ほぼ100%・残存約8.7%・停止98〜270秒）を README に収録。Windows/Linux 両対応・標準ライブラリのみ。機械判定8項目の eval つき。 | 2026-08-31 |
 | [claude-code-session-board](https://github.com/hatohato-lab/claude-code-session-board) | 稼働中・過去の全セッション（チャット）の ID・私が付けた名前・圧縮回数・大きさ・作業フォルダ・直近の作業を、生ログから9列の1枚の表にする名簿。他のセッションを ID で確実に指せるようにする。 | セッション間通信（宛先の名簿） | 自分の見分け方は3段（環境変数→マーカー→最新ログ＋警告）。表の中身はPC固有なので公開しない（ツールだけ公開）。標準ライブラリのみ。機械判定12項目の eval つき。 | 2026-09-12 |
 | [claude-code-chat-doctor](https://github.com/hatohato-lab/claude-code-chat-doctor) | チャットが重くなる前に、使用率・圧縮回数・貼った画像の枚数と大きさ・生ログの大きさから「続行／compact／新チャット」を根拠つきの1行で勧める診断ツール。稼働中の全チャットを1つの表でも出せる。 | コンテキスト計測（判断） | 判定規則は rules.json に出典URLと確認日つきで置き、--check-rules で公式ページを取り直して数値のずれを報告する（仕様変更に追随）。statusline の JSON を優先し、生ログは予備。フック用の --hook は続行なら無音。標準ライブラリのみ。機械判定9項目の eval つき。 | 2026-09-12 |
+| [oracle-compass](https://github.com/hatohato-lab/oracle-compass) | フォルダを1つ渡すと「観点→基準→オラクル→判定→改善」の5歩を1歩ずつ対話で進め、評価駆動開発を身につける羅針盤。各歩で用語の定義を1〜2行添え、学習帳に回数と使った型を積む。 | 評価駆動の学習（対話） | 1返信＝1歩。判断は私がし、AI は候補と根拠を出す。図鑑から向く型を1つ勧め、機械の型なら検査スクリプトを書いて走らせる。標準ライブラリのみ。機械判定13項目の eval つき。 | 2026-09-12 |
 | [kaizen-map](https://github.com/hatohato-lab/kaizen-map) | 任意のシステムを走査し、地図（PlantUML図）＋改善候補＋乖離対策の3表を左メニュー付きHTML1枚にする | システム改善（地図＋レンズ） | 改善候補は観点ごとの独立レンズ（第1層＝テスト欠落・設定の匂い・死んだコード。すべて決定的判定）。人間とAIの乖離を用語表・推定表・判断履歴の3表で構造的に防ぎ、却下済みの提案は二度と蒸し返さない。機械判定17項目の eval つき。 | 2026-08-31 |
 | [claude-code-version-guard](https://github.com/hatohato-lab/claude-code-version-guard) | Claude Code本体（CLI・VS Code拡張）のバージョンの遅れを見張る番人 | バージョン監視 | npmレジストリのバージョン一覧から遅れパッチ数を数え、使用中・最新・変更点を1つの表に。SessionStartフック用 --hook は遅れているときだけ1行警告（最新なら出力ゼロ＝トークン消費ゼロ。最新確認は6時間キャッシュ・失敗時は沈黙）。機械判定9項目の eval つき。 | 2026-08-31 |
 
