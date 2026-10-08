@@ -1,12 +1,12 @@
 # HatoHato Lab
 
-AIエージェントの評価設計（オラクル）の実証と、Claude Code の長期運用から生まれた道具を公開しています。
+AIエージェントの評価設計（オラクル）の実証と、Claude Code の長期運用から生まれた道具、LLM の扱い方の知識の木を公開しています。
 
 | 系統 | 本数 | 概要 |
 |---|---|---|
 | EDD エージェント | 13 | 1リポジトリ=1オラクルで、13種の採点手法を独立に実証：<br>・差分テスト<br>・決定的 golden<br>・メタモルフィック<br>・プロパティ往復<br>・統計検定（カイ二乗）<br>・ファジング<br>・仕様アサーション<br>・実行結果照合（SQL）<br>・LLM-as-Judge＋決定的ゲート<br>・査読のメタ評価×2<br>・文書構造検査<br>・行動回帰テスト＋統計 |
 | Claude Code ツール | 11 | 複数セッション並行の実運用から切り出した道具。全て機械判定 eval 同梱：<br>・チャット引き継ぎ（hikitsugi）<br>・ルール同期（rules-sync）<br>・チャット間の黒板（kokuban）<br>・作業フォルダビューア（hatohatoscope）<br>・ルール退役の実測（rule-retirement-eval）<br>・チャットの容量計（context-meter）<br>・改善の地図（kaizen-map）<br>・バージョンの番人（version-guard）<br>・セッションの名簿（session-board）<br>・チャットの診断（chat-doctor）<br>・評価駆動の羅針盤（oracle-compass） |
-| その他 | 2 | ・formpilot（LangGraph ReAct＋Vision＋Playwright のフォーム自動入力）<br>・VBA_Tools（Excel マクロ集） |
+| その他 | 3 | ・formpilot（LangGraph ReAct＋Vision＋Playwright のフォーム自動入力）<br>・VBA_Tools（Excel マクロ集）<br>・llm-harness-knowledge-tree（LLM の扱い方の知識の木。葉326枚） |
 
 共通するのは「正しさの判定を機械に、最終判断を人間に」という作り方です。
 ツール群も自分の実環境で毎日使ってから公開しています。
@@ -60,3 +60,4 @@ Claude Code の長期運用で必要に迫られて作った道具群。毎日�
 |---|---|---|---|
 | [formpilot](https://github.com/hatohato-lab/formpilot) | PDF データから Web フォームへ自動入力する AI エージェント | LangGraph ReAct + Claude Vision + Playwright の構成。PDFの読み取りから画面操作までを一気通貫で自動化。 | 2026-07-22 |
 | [VBA_Tools](https://github.com/hatohato-lab/VBA_Tools) | Excel 業務効率化の VBA マクロ集 | 結合・一覧・抽出・監査など、日常の Excel 作業を自動化する実用ツール群。 | 2026-07-22 |
+| [llm-harness-knowledge-tree](https://github.com/hatohato-lab/llm-harness-knowledge-tree) | LLM（Claude Code などのエージェント）の扱い方を、根拠の段階つきで分類した日本語の知識の木 | 指示・文脈・工程・評価・安全を6つの枝と326枚の葉に分類。各葉は仕組み・使い方・試し方・出典など7節で、根拠の段階（公式で確認、論文で確認、体験談だけ、未確認など）を明示する。投稿は載せず、出典は公式の文書・論文・記事へのリンク。文章の大半は AI が書き、効果は未検証と README に明記。文章は CC BY 4.0、道具は MIT。 | 2026-10-08 |
