@@ -5,7 +5,7 @@ AIエージェントの評価設計（オラクル）の実証と、Claude Code 
 | 系統 | 本数 | 概要 |
 |---|---|---|
 | EDD エージェント | 13 | 1リポジトリ=1オラクルで、13種の採点手法を独立に実証：<br>・差分テスト<br>・決定的 golden<br>・メタモルフィック<br>・プロパティ往復<br>・統計検定（カイ二乗）<br>・ファジング<br>・仕様アサーション<br>・実行結果照合（SQL）<br>・LLM-as-Judge＋決定的ゲート<br>・査読のメタ評価×2<br>・文書構造検査<br>・行動回帰テスト＋統計 |
-| Claude Code ツール | 12 | 複数セッション並行の実運用から切り出した道具。全て機械判定 eval 同梱：<br>・チャット引き継ぎ（hikitsugi）<br>・ルール同期（rules-sync）<br>・チャット間の黒板（kokuban）<br>・作業フォルダビューア（hatohatoscope）<br>・ルール退役の実測（rule-retirement-eval）<br>・チャットの容量計（context-meter）<br>・改善の地図（kaizen-map）<br>・バージョンの番人（version-guard）<br>・セッションの名簿（session-board）<br>・チャットの診断（chat-doctor）<br>・評価駆動の羅針盤（oracle-compass）<br>・画面の部品の集まり（hatohato-mods） |
+| Claude Code ツール | 14 | 複数セッション並行の実運用から切り出した道具。全て機械判定 eval 同梱：<br>・チャット引き継ぎ（hikitsugi）<br>・ルール同期（rules-sync）<br>・チャット間の黒板（kokuban）<br>・作業フォルダビューア（hatohatoscope）<br>・ルール退役の実測（rule-retirement-eval）<br>・チャットの容量計（context-meter）<br>・改善の地図（kaizen-map）<br>・バージョンの番人（version-guard）<br>・セッションの名簿（session-board）<br>・チャットの診断（chat-doctor）<br>・評価駆動の羅針盤（oracle-compass）<br>・セッションの表の MOD（session-info）<br>・セッション間の連絡の MOD（session-list）<br>・効いているルールの MOD（active-rules） |
 | その他 | 3 | ・formpilot（LangGraph ReAct＋Vision＋Playwright のフォーム自動入力）<br>・VBA_Tools（Excel マクロ集）<br>・llm-harness-knowledge-tree（LLM の扱い方の知識の木。葉326枚） |
 
 共通するのは「正しさの判定を機械に、最終判断を人間に」という作り方です。
@@ -53,7 +53,9 @@ Claude Code の長期運用で必要に迫られて作った道具群。毎日�
 | [oracle-compass](https://github.com/hatohato-lab/oracle-compass) | フォルダを1つ渡すと「観点→基準→オラクル→判定→改善」の5歩を1歩ずつ対話で進め、評価駆動開発を身につける羅針盤。各歩で用語の定義を1〜2行添え、学習帳に回数と使った型を積む。 | 評価駆動の学習（対話） | 1返信＝1歩。判断は私がし、AI は候補と根拠を出す。図鑑から向く型を1つ勧め、機械の型なら検査スクリプトを書いて走らせる。標準ライブラリのみ。機械判定13項目の eval つき。 | 2026-09-12 |
 | [kaizen-map](https://github.com/hatohato-lab/kaizen-map) | 任意のシステムを走査し、地図（PlantUML図）＋改善候補＋乖離対策の3表を左メニュー付きHTML1枚にする | システム改善（地図＋レンズ） | 改善候補は観点ごとの独立レンズ（第1層＝テスト欠落・設定の匂い・死んだコード。すべて決定的判定）。人間とAIの乖離を用語表・推定表・判断履歴の3表で構造的に防ぎ、却下済みの提案は二度と蒸し返さない。機械判定17項目の eval つき。 | 2026-08-31 |
 | [claude-code-version-guard](https://github.com/hatohato-lab/claude-code-version-guard) | Claude Code本体（CLI・VS Code拡張）のバージョンの遅れを見張る番人 | バージョン監視 | npmレジストリのバージョン一覧から遅れパッチ数を数え、使用中・最新・変更点を1つの表に。SessionStartフック用 --hook は遅れているときだけ1行警告（最新なら出力ゼロ＝トークン消費ゼロ。最新確認は6時間キャッシュ・失敗時は沈黙）。機械判定9項目の eval つき。 | 2026-08-31 |
-| [hatohato-mods](https://github.com/hatohato-lab/hatohato-mods) | Claude Code の画面に部品を足す MOD の集まり。いまは、開いている全セッションを1行ずつの表で見る「セッション情報」が入っている。 | 画面の部品（MOD） | チームと主、返事待ちの色、g のボタン、送る文、詳しくのボタン、AI の要約。/plugin install の1行で入る。機械判定14項目のテストつき。 | 2026-10-18 |
+| [claude-code-session-info](https://github.com/hatohato-lab/claude-code-session-info) | 開いている全セッションを1行ずつの表で見る、Claude Code の画面の部品（MOD）。 | 画面の部品（MOD） | チームと主、返事待ちの色、g のボタン、送る文、詳しくのボタン、AI の要約。/plugin install の1行で入る。機械判定14項目のテストつき。 | 2026-10-18 |
+| [claude-code-session-list](https://github.com/hatohato-lab/claude-code-session-list) | セッション間の連絡（SendMessage の合図と黒板の連絡）を、行が1セッション、矢印が1回の連絡の図で見る、Claude Code の画面の部品（MOD）。 | 画面の部品（MOD） | 詳しい表示にすると、返事待ちと承認待ち、入力欄、会話の地図、セッションの表、AI の要約も出す。/plugin install の1行で入る。機械判定17項目のテストつき。 | 2026-10-18 |
+| [claude-code-active-rules](https://github.com/hatohato-lab/claude-code-active-rules) | いま読み込まれているルール（.claude/rules）を、行数、文字数、推定トークンの表で見る、Claude Code の画面の部品（MOD）。 | 画面の部品（MOD） | 読み込まれたかは /context と同じ内訳で判定し、合計の行と、ルールの長さについての Anthropic の公式の記述も出す。ファイルを触ると、そこで効く場所限定のルールを toast で知らせる。モデルを呼ばないので使用量はかからない。/plugin install の1行で入る。機械判定6項目のテストつき。 | 2026-10-18 |
 
 ## その他の公開リポジトリ
 
